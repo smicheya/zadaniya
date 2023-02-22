@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Простейший калькулятор</title>
+    <style type="text/css">
+        .submit_form
+        {
+            color: blue;
+        }
+    </style>
+</head>
+<body>
+<form action="" method="post" class="calculate">
+    <input type="text" name="number1" class="numbers" placeholder="первое число">
+
+    <select class="operations" name="operation">
+        <option value='plus'>+ </option>
+        <option value='minus'>- </option>
+        <option value="multiply">* </option>
+        <option value="divide">/ </option>
+    </select>
+    <input type="text" name="number2" class="numbers" placeholder="второе число"><br>
+         
+    <input class="submit_form" type="submit" name="submit" value="Рассчитать"> 
+    </form>
+
+<?php
+if(isset($_POST['submit'])){
+    $number1 = $_POST['number1'];
+    $number2 = $_POST['number2'];
+    $operation = $_POST['operation'];
+
+    switch($operation){
+        case 'plus':
+            $result = $number1 + $number2;
+            break;
+        case 'minus':
+            $result = $number1 - $number2;
+            break;
+        case 'multiply':
+            $result = $number1 * $number2;
+            break;
+        case 'divide':
+            if( $number2 == '0')
+                $result = "На ноль делить нельзя!";
+            else
+               $result = $number1 / $number2;
+            break;    
+    }
+        
+}
+echo "<div class='answer'>Ответ: $result</div>";
+?>
+
+</body>
+</html>
