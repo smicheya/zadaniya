@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Галерея</title>
+    <style type="text/css">
+        img {
+        width:30%;
+        height:380px;
+        position:relative;
+        }
+
+    </style>
+</head>
+<body>
+
+<form action="" method="post" enctype="multipart/form-data">
+    <p>Изображение:
+    <input type="file" name="uploaded_file" />
+    <input type="hidden" name="MAX_FILE_SIZE" value="5242880" />
+    <input type="submit" value="Отправить" />
+    </p>
+</form>
+
+<?php
+
+$MaxFileSizeInBytes = 5242880;
+// Разрешение расширения файлов для загрузки
+$AllowFileExtension = array('jpg', 'png', 'jpeg', 'gif', 'raw', 'pdf');
+// Оригинальное название файла
+$FileName = $_FILES['uploaded_file']['name'];
+// Полный путь до временного файла
+$TempName = $_FILES['uploaded_file']['tmp_name'];
+// Папка где будут загружатся файлы
+$UploadDir = "img/";
+// Полный путь к новому файлу в папке сервера
+$NewFilePatch = $UploadDir.$FileName;
+
+if($FileName) {
+    // Проверка если расширение файла находится в массиве доступных
+    $FileExtension = pathinfo($FileName, PATHINFO_EXTENSION);
+    if(!in_array($FileExtension, $AllowFileExtension)) {
+        echo "Файлы с расширением {$FileExtension} не допускаются<br>";
+    }
+     else {
+         // Проверка размера файла
+         if(filesize($TempName) > $MaxFileSizeInBytes) {
+             echo "Размер загружаемого файла превышает 5МБ<br>";
+         }
+          else {
+              // Проверяем права доступа на папку
+              if(!is_writable($UploadDir)) {
+                  echo "Папка ".$UploadDir." не имеет прав на запись<br>";
+              }
+               else {
+                   // Копируем содержимое временного файла $TempName и создаем нового в папке сервера
+                   $CopyFile = copy($TempName, $NewFilePatch);
+                   if(!$CopyFile) {
+                       echo "Возникла ошибка, файл не удалось загрузить!";
+                   }
+                    else {
+                        echo "Файл успешно загружен!<br />";
+                    }
+               }
+          }
+     }
+}
+
+function excess($files) {
+    $result = array();
+    $AllowFileExtension = array('jpg', 'png', 'jpeg', 'gif', 'raw');
+    for ($i = 0; $i < count($files); $i++) {
+        if ($files[$i])
+        {
+            $FileExtension = pathinfo($files[$i], PATHINFO_EXTENSION);
+            if (in_array($FileExtension,$AllowFileExtension) ) $result[] = $files[$i];
+        }       
+    }
+    return $result;
+  }
+  $dir="img";
+
+  $files = scandir($dir); // Получаем список файлов из этой директории
+  $files = excess($files); // Удаляем лишние файлы
+
+  for ($i = 0; $i < count($files); $i++) { ?>
+  
+  <img src="<?=$dir."/".$files[$i]?>" alt="" />
+
+  <?php if (($i + 1) % 3 == 0) echo "\n";
+
+  } ?>
+
+
+</body>
+</html>
