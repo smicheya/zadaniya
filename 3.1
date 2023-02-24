@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Месяцы</title>
+</head>
+<body>
+
+<form action="" method="post" class="calculate">
+    <input type="text" name="vklad" class="s_vklad" placeholder="сумма вклада">
+    <input type="text" name="month" class="months" placeholder="срок в месяцах">
+    <input type="text" name="p_year" class="percents" placeholder="годовой процент">
+
+    <input class="submit_form" type="submit" name="submit" value="Вычислить сумму"> 
+ </form>
+
+<?php
+$summa = $_POST['vklad'];
+$srok_v = $_POST['month'];
+$percent =  $_POST['p_year'];
+
+function calculate_summa($summa, $srok_v, $percent) {
+
+    return  $summa + round( ($summa * $percent * $srok_v*30.4)/(365 * 100), 0 );
+}
+
+echo calculate_summa($summa, $srok_v, $percent);
+
+?>
+
+</body>
+</html>
