@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Часы</title>
+</head>
+<body>
+
+<form action="" method="post" enctype="multipart/form-data">
+    <input type="text" name="houer" class="houers" placeholder="часы">
+    <input type="text" name="minute" class="minutess" placeholder="минуты">
+
+    <input class="submit_form" type="submit" name="submit" value="вычислить"> 
+</form>
+
+<?php
+$h = $_POST['houer'];
+$m = $_POST['minute'];
+
+echo "Ответ: ".get_degree($h, $m);
+
+function get_degree($h, $m)
+{
+    $o_m = 360/60; // 1 минута равна 6 градусам
+    $o_h = 30/60; // 1 час равен 0,5 градусов
+
+    $s_m = $m * $o_m;
+    $s_h = ($h * 60 + $m) * $o_h; //путь проделанный стрелкой
+    return ($deg_h - $deg_m);
+} 
+
+
+?>
+
+
+</body>
+</html>
