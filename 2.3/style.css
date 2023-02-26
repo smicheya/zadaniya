@@ -1,0 +1,33 @@
+.clearfix::after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.list {
+    list-style: none;
+}
+
+ul {
+    list-style: square;
+}
+
+.list::before {
+    float: left;
+    content: "[+]";
+    margin-right: 4px;
+}
+
+.list.active::before {
+    float: left;
+    content: "[-]";
+    margin-right: 4px;
+}
+
+.expandable {
+    display: none;
+}
+
+.list.active > .expandable {
+    display: block;
+}
