@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="style.css">
+</head>
+<main>
+            <section>
+                <h1>Валидация формы: </h1>
+                <form method="post" name="form" class="forms">
+                    <p class="field">
+                        <label for="f_text">Введите текст: </label>
+                        <input class="required" name="text" id="f_text">
+                    </p>            
+                    <p class="field">
+                        <label for="f_phone">Телефон: </label>
+                        <input class="phone" name="phone" id="f_phone">
+                    </p>
+                    <p class="field">
+                        <label for="f_mail">E-mail: </label>
+                        <input class="email" name="email" id="f_mail">
+                    </p>
+                    <button type="submit">Отправить</button>
+                </form>
+                <div class="validation-errors"></div>
+            </section>
+        </main>
+    </body> 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="script.js"></script>
+
+</html>
