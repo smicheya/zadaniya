@@ -1,0 +1,54 @@
+.clearfix::after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.catalog-container {
+  width: auto;
+  margin: auto;
+  padding: 0;
+  list-style: none;
+}
+
+.catalog-container li {
+  float: left;
+  height: 65px;
+  background-color: #FA8072;
+  outline: 2px solid;
+}
+
+button {
+  margin: 5px 0px;
+}
+
+.catalog-container .list {  
+  width: 100%;
+  margin: 0 !important;
+}
+
+
+@media (min-width:1025px)
+{
+  .catalog-container li {
+    width: 30%;
+}
+
+  .catalog-container li:nth-child(3n - 1) {
+    margin: 0 3.33%;
+  }
+}
+
+@media (min-width:768px) and (max-width:1024px)
+{
+  .catalog-container li {
+    width: 45%;
+  }
+}
+
+@media (max-width:767px)
+{
+  .catalog-container li {
+    width: 100%;
+  }
+}
